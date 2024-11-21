@@ -12,7 +12,7 @@ export function SystemsIndex({ systems }) {
           <p>Cultural System: {system.cultural_system}</p>
           <p>Cultural Index: {system.cultural_index}</p>
           <img src={system.image_url} alt="" />
-          <a href={system.wiki_page}>Wikipedia</a>
+          <a href={system.wiki_page}>Wiki Page</a>
         </div>
       ))}
     </div>

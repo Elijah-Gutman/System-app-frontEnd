@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-
+import { useState, useEffect } from "react";
 import { SystemsIndex } from "./SystemsIndex";
+import { SystemsNew } from "./SystemsNew";
 
 export function SystemsPage() {
   const [systems, setSystems] = useState([]);
@@ -14,13 +14,20 @@ export function SystemsPage() {
     });
   };
 
+  const handleCreate = (params, successCallback) => {
+    console.log("handleCreate");
+    axios.post("/systems.json", params).then((response) => {
+      setSystems([...systems, response.data]);
+      successCallback();
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
     <main>
-      <h1>
-        <SystemsIndex systems={systems} />
-      </h1>
+      <SystemsNew onCreate={handleCreate} />
+      <SystemsIndex systems={systems} />
     </main>
   );
 }
