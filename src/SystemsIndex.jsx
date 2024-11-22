@@ -13,6 +13,7 @@ export function SystemsIndex({ systems }) {
           <p>Cultural Index: {system.cultural_index}</p>
           <img src={system.image_url} alt="" />
           <a href={system.wiki_page}>Wiki Page</a>
+          <button onClick={() => onShow(system)}>More info</button>
         </div>
       ))}
     </div>
