@@ -2,11 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { SystemsIndex } from "./SystemsIndex";
 import { SystemsNew } from "./SystemsNew";
+import { SystemsShow } from "./SystemsShow";
 import { Modal } from "./Modal";
 
 export function SystemsPage() {
   const [systems, setSystems] = useState([]);
-  const [isSystemsShowVisible, setIsSystemsShowVisible] = useState(true);
+  const [isSystemsShowVisible, setIsSystemsShowVisible] = useState(false);
+  const [currentSystem, setCurrentSystem] = useState({});
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -26,6 +28,11 @@ export function SystemsPage() {
   const handleShow = (system) => {
     console.log("handleShow", system);
     setIsSystemsShowVisible(true);
+    setCurrentSystem(system);
+  };
+
+  const handleUpdate = () => {
+    console.log("handleUpdate");
   };
 
   useEffect(handleIndex, []);
@@ -35,7 +42,7 @@ export function SystemsPage() {
       <SystemsNew onCreate={handleCreate} />
       <SystemsIndex systems={systems} onShow={handleShow} />
       <Modal show={isSystemsShowVisible} onClose={() => setIsSystemsShowVisible(false)}>
-        <h1>Test</h1>
+        <SystemsShow system={currentSystem} onUpdate={handleUpdate} />
       </Modal>
     </main>
   );

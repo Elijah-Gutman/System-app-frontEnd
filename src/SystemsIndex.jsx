@@ -1,4 +1,4 @@
-export function SystemsIndex({ systems }) {
+export function SystemsIndex({ systems, onShow }) {
   return (
     <div>
       <h1>All systems ({systems.length} total)</h1>
