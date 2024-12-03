@@ -15,7 +15,8 @@ const landingPage = () => {
 export function SystemsShow({ system, onUpdate }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    onUpdate();
+    const params = new FormData(event.target);
+    onUpdate(system, params, () => event.target.reset());
   };
   return (
     <div>

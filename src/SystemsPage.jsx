@@ -31,8 +31,29 @@ export function SystemsPage() {
     setCurrentSystem(system);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (system, params, successCallback) => {
     console.log("handleUpdate");
+    axios.patch(`/systems/${system.id}.json`, params).then((response) => {
+      const updatedSystem = response.data;
+
+      // Update the systems array
+      setSystems(
+        systems.map((p) => {
+          if (p.id === updatedSystem.id) {
+            return updatedSystem;
+          } else {
+            return p;
+          }
+        })
+      );
+
+      // If the current system in the modal matches the updated system, update the modal data
+      if (currentSystem.id === updatedSystem.id) {
+        setCurrentSystem(updatedSystem);
+      }
+
+      successCallback();
+    });
   };
 
   useEffect(handleIndex, []);
