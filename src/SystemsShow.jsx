@@ -44,7 +44,7 @@ export function SystemsShow({ system, onUpdate }) {
           Economic Index: <input defaultValue={system.economic_index} name="Economic Index" type="text" />
         </div>
         <div>
-          Governmental System:{" "}
+          Governmental System:
           <input defaultValue={system.governmental_system} name="governmental_system" type="text" />
         </div>
         <div>
