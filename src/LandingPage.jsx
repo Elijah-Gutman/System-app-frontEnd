@@ -14,7 +14,11 @@ export function LandingPage() {
     const params = new FormData(event.target);
     console.log(params.get("name"));
     if (params.get("name") === "system") {
-      window.location.href = "/systems";
+      createRoot(document.getElementById("root")).render(
+        <StrictMode>
+          <App />
+        </StrictMode>
+      );
     }
   };
   return (
