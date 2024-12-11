@@ -4,6 +4,9 @@ import { SystemsIndex } from "./SystemsIndex";
 import { SystemsNew } from "./SystemsNew";
 import { SystemsShow } from "./SystemsShow";
 import { Modal } from "./Modal";
+import { NewSystemPage } from "./NewSystemPage";
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
 
 export function SystemsPage() {
   const [systems, setSystems] = useState([]);
@@ -60,7 +63,17 @@ export function SystemsPage() {
 
   return (
     <main>
-      <SystemsNew onCreate={handleCreate} />
+      <button
+        onClick={() =>
+          createRoot(document.getElementById("root")).render(
+            <StrictMode>
+              <NewSystemPage />
+            </StrictMode>
+          )
+        }
+      >
+        Add Country
+      </button>
       <SystemsIndex systems={systems} onShow={handleShow} />
       <Modal show={isSystemsShowVisible} onClose={() => setIsSystemsShowVisible(false)}>
         <SystemsShow system={currentSystem} onUpdate={handleUpdate} />
