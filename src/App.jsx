@@ -21,12 +21,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/",
-        element: <SystemsPage />,
+        path: "/", //nothing infront of the forward slash = index url
+        element: <LandingPage />,
       },
       {
-        path: "/landingPage", //nothing infront of the forward slash = index url
-        element: <LandingPage />,
+        path: "/systems",
+        element: <SystemsPage />,
       },
       {
         path: "/signup",

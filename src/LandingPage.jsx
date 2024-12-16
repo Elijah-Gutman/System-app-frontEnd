@@ -5,6 +5,7 @@ import { SignupLoginLogoutButton } from "./SignupLoginLogoutButton.jsx";
 import { Modal } from "./Modal.jsx";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = "http://localhost:5173";
 axios.defaults.withCredentials = true;
@@ -12,6 +13,7 @@ axios.defaults.withCredentials = true;
 export function LandingPage() {
   const [selectedOption, setSelectedOption] = useState(""); // State for radio button selection
   const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value); // Update the selected radio button
@@ -23,10 +25,10 @@ export function LandingPage() {
     switch (selectedOption) {
       case "option1":
         //window.location.href("/signup");
-        window.location.replace(axios.defaults.baseURL + "/signup");
+        navigate("/signup");
         break;
       case "option2":
-        window.location.replace(axios.defaults.baseURL + "/login");
+        navigate("/login");
         break;
     }
     //alert(`You selected: ${selectedOption}`); // Show selected option
