@@ -23,12 +23,12 @@ export function LandingPage() {
     event.preventDefault();
 
     switch (selectedOption) {
-      case "option1":
+      case "Option1":
         //window.location.href("/signup");
-        navigate("/signup");
+        navigate("/systems/first");
         break;
-      case "option2":
-        navigate("/login");
+      case "Option2":
+        navigate("/systems");
         break;
     }
     //alert(`You selected: ${selectedOption}`); // Show selected option
@@ -47,14 +47,46 @@ export function LandingPage() {
         <form onSubmit={handleFormSubmit}>
           <div>
             <label>
-              <input type="radio" value="option1" checked={selectedOption === "option1"} onChange={handleChange} />
-              Option 1
+              <input type="radio" value="Option1" checked={selectedOption === "Option1"} onChange={handleChange} />
+              Yes
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="option2" checked={selectedOption === "option2"} onChange={handleChange} />
-              Option 2
+              <input type="radio" value="Option2" checked={selectedOption === "Option2"} onChange={handleChange} />
+              No
+            </label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+        <h2>Do you believe wealth is a function of competence?</h2>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <label>
+              <input type="radio" value="Option3" checked={selectedOption === "Option3"} onChange={handleChange} />
+              Yes
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="radio" value="Option4" checked={selectedOption === "Option4"} onChange={handleChange} />
+              No
+            </label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+        <h2>Do you believe rights are inalienable?</h2>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <label>
+              <input type="radio" value="Option5" checked={selectedOption === "Option5"} onChange={handleChange} />
+              Yes
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="radio" value="Option6" checked={selectedOption === "Option6"} onChange={handleChange} />
+              No
             </label>
           </div>
           <button type="submit">Submit</button>
