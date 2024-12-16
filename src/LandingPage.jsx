@@ -4,48 +4,56 @@ import { createRoot } from "react-dom/client";
 import { SignupLoginLogoutButton } from "./SignupLoginLogoutButton.jsx";
 import { Modal } from "./Modal.jsx";
 import { useState } from "react";
-import { SignupPage } from "./SignupPage.jsx";
-import { AuthenticationPage } from "./AuthenticationPage";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5173";
+axios.defaults.withCredentials = true;
 
 export function LandingPage() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const params = new FormData(event.target);
-    console.log(params.get("name"));
-    if (params.get("name") === "system") {
-      createRoot(document.getElementById("root")).render(
-        <StrictMode>
-          <App />
-        </StrictMode>
-      );
-    }
+  const [selectedOption, setSelectedOption] = useState(""); // State for radio button selection
+  const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value); // Update the selected radio button
   };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    switch (selectedOption) {
+      case "option1":
+        //window.location.href("/signup");
+        window.location.replace(axios.defaults.baseURL + "/signup");
+        break;
+      case "option2":
+        window.location.replace(axios.defaults.baseURL + "/login");
+        break;
+    }
+    //alert(`You selected: ${selectedOption}`); // Show selected option
+    setIsModalVisible(false); // Close the modal after submission
+  };
+
   return (
     <div>
       <SignupLoginLogoutButton />
       <h1>System-app</h1>
       <p>Welcome to System-app! This app allows you to view and create systems.</p>
       <p>Click the "Systems" link in the navigation bar to get started.</p>
-      <button
-        onClick={() =>
-          createRoot(document.getElementById("root")).render(
-            <StrictMode>
-              <App />
-            </StrictMode>
-          )
-        }
-      >
-        Click me
-      </button>
-      <button onClick={() => setIsModalVisible(true)}>Start</button>
+      <button onClick={() => setIsModalVisible(true)}>Begin Evalution</button>
       <Modal show={isModalVisible} onClose={() => setIsModalVisible(false)}>
-        <h1>Modal</h1>
-        <p>This is a modal</p>
-        <form onSubmit={handleSubmit}>
+        <h2>Do you enjoy responsibility? </h2>
+        <form onSubmit={handleFormSubmit}>
           <div>
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" />
+            <label>
+              <input type="radio" value="option1" checked={selectedOption === "option1"} onChange={handleChange} />
+              Option 1
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="radio" value="option2" checked={selectedOption === "option2"} onChange={handleChange} />
+              Option 2
+            </label>
           </div>
           <button type="submit">Submit</button>
         </form>

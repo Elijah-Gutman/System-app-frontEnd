@@ -5,6 +5,7 @@ import { SignupPage } from "./SignupPage";
 import { LoginPage } from "./LoginPage";
 import { SystemsPage } from "./SystemsPage";
 import { Footer } from "./Footer";
+import { LandingPage } from "./LandingPage";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <SystemsPage />,
+      },
+      {
+        path: "/landingPage", //nothing infront of the forward slash = index url
+        element: <LandingPage />,
       },
       {
         path: "/signup",
