@@ -1,23 +1,39 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { LandingPage } from "./LandingPage.jsx";
-
-const landingPage = () => {
-  location.replace = createRoot(document.getElementById("root")).render(
-    <StrictMode>
-      <LandingPage />
-    </StrictMode>
-  );
-};
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate("/");
+  };
+
   return (
-    <header>
-      <nav>
-        <button onClick={landingPage}>Home</button> | <a href="#">Link</a>
-      </nav>
+    <header className="absolute top-4 left-4">
+      <button
+        onClick={handleNavigation}
+        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded shadow transition-all"
+      >
+        Home
+      </button>
     </header>
   );
 }
+
+// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
+// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
+// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
+// import "./index.css";
+// import { useNavigate } from "react-router-dom";
+
+// export function Header() {
+//   const navigate = useNavigate();
+//   const handleNavigation = () => {
+//     navigate("/");
+//   };
+//   return (
+//     <header>
+//       <nav>
+//         <button onClick={handleNavigation}>Home</button>
+//       </nav>
+//     </header>
+//   );
+// }
