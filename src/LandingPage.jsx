@@ -94,9 +94,6 @@ export function LandingPage() {
                   No
                 </label>
               </div>
-              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                Submit
-              </button>
             </form>
             {/* Question 2 */}
             <form onSubmit={handleFormSubmit} className="mb-6">
@@ -123,9 +120,6 @@ export function LandingPage() {
                   No
                 </label>
               </div>
-              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                Submit
-              </button>
             </form>
             {/* Question 3 */}
             <form onSubmit={handleFormSubmit}>

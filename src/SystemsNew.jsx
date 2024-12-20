@@ -16,19 +16,10 @@ export function SystemsNew({ onCreate }) {
           Economic System: <input name="economic_system" type="text" />
         </div>
         <div>
-          Economic Index: <input name="economic_index" type="text" />
-        </div>
-        <div>
           Governmental System: <input name="governmental_system" type="text" />
         </div>
         <div>
-          Governmental Index: <input name="governmental_index" type="text" />
-        </div>
-        <div>
           Cultural System: <input name="cultural_system" type="text" />
-        </div>
-        <div>
-          Cultural Index: <input name="cultural_index" type="text" />
         </div>
         <div>
           Image URL: <input name="image_url" type="text" />

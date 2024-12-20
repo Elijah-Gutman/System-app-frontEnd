@@ -23,11 +23,7 @@ export function SystemsShow({ system, onUpdate }) {
       <h1>Country</h1>
       <p>Country Name: {system.country_name}</p>
       <p>Economic System: {system.economic_system}</p>
-      <p>Economic Index: {system.economic_index}</p>
-      <p>Governmental System: {system.governmental_system}</p>
-      <p>Governmental Index: {system.governmental_index}</p>
       <p>Cultural System: {system.cultural_system}</p>
-      <p>Cultural Index: {system.cultural_index}</p>
       <p>
         Image: <img src={system.image_url} alt="" />
       </p>
@@ -41,20 +37,11 @@ export function SystemsShow({ system, onUpdate }) {
           Economic System : <input defaultValue={system.economic_system} name="economic_system" type="text" />
         </div>
         <div>
-          Economic Index: <input defaultValue={system.economic_index} name="Economic Index" type="text" />
-        </div>
-        <div>
           Governmental System:
           <input defaultValue={system.governmental_system} name="governmental_system" type="text" />
         </div>
         <div>
-          Governmental Index: <input defaultValue={system.governmental_index} name="governmental_index" type="text" />
-        </div>
-        <div>
           Cultural System: <input defaultValue={system.cultural_system} name="cultural_system" type="text" />
-        </div>
-        <div>
-          Cultural Index: <input defaultValue={system.cultural_index} name="cultural_index" type="text" />
         </div>
         <div>
           Image: <input defaultValue={system.image_url} name="image_url" type="text" />
