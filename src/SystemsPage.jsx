@@ -8,12 +8,17 @@ import { NewSystemPage } from "./NewSystemPage";
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function SystemsPage() {
   const [systems, setSystems] = useState([]);
   const [isSystemsShowVisible, setIsSystemsShowVisible] = useState(false);
   const [currentSystem, setCurrentSystem] = useState({});
   const location = useLocation();
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate("/systemsnew");
+  };
 
   const handleIndex = () => {
     axios.get("/systems.json").then((response) => {
@@ -80,13 +85,7 @@ export function SystemsPage() {
       </div>
       <div className="flex justify-center p-4 bg-gray-800">
         <button
-          onClick={() =>
-            createRoot(document.getElementById("root")).render(
-              <StrictMode>
-                <NewSystemPage />
-              </StrictMode>
-            )
-          }
+          onClick={handleNavigation}
           className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 transition"
         >
           Add Country

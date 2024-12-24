@@ -3,20 +3,18 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { LandingPage } from "./LandingPage.jsx";
+import { useNavigate } from "react-router-dom";
 
-const landingPage = () => {
-  location.replace = createRoot(document.getElementById("root")).render(
-    <StrictMode>
-      <LandingPage />
-    </StrictMode>
-  );
-};
 
 export function SystemsShow({ system, onUpdate }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
     onUpdate(system, params, () => event.target.reset());
+  };
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate("/");
   };
 
   return (
@@ -38,7 +36,7 @@ export function SystemsShow({ system, onUpdate }) {
           </button>
           <button
             type="button"
-            onClick={landingPage}
+            onClick={handleNavigation}
             className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition"
           >
             Home
