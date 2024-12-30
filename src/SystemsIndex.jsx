@@ -1,7 +1,26 @@
+import { useState, useEffect } from "react";
+
 export function SystemsIndex({ systems, onShow }) {
+  const [countryData, setCountryData] = useState(null); // State for API data
+
+  useEffect(() => {
+    if (systems[0]?.country_name === "USA") {
+      // Fetch data from Rest Countries API if the first system is the USA
+      fetch("https://restcountries.com/v3.1/name/usa")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Rest Countries API Data:", data); // Log raw data for testing
+          setCountryData(data[0]); // Save the first result from the API
+        })
+        .catch((error) => {
+          console.error("Error fetching Rest Countries data:", error);
+        });
+    }
+  }, [systems]);
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200">
-      {systems.map((system) => (
+      {systems.map((system, index) => (
         <div
           key={system.id}
           className="w-3/4 max-w-2xl bg-white shadow-xl rounded-lg overflow-hidden border border-gray-300 transform scale-105"
@@ -23,7 +42,28 @@ export function SystemsIndex({ systems, onShow }) {
             <p className="text-gray-600 text-lg mb-6">
               <span className="font-semibold text-gray-800">Cultural System:</span> {system.cultural_system}
             </p>
-            <div className="flex justify-between items-center">
+
+            {/* Display API Data Conditionally */}
+            {index === 0 && countryData && (
+              <div className="bg-blue-100 p-4 rounded-lg mt-4">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-2">Additional Information from API:</h3>
+                <p className="text-gray-700">
+                  <span className="font-bold">Capital:</span> {countryData.capital?.[0]}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-bold">Region:</span> {countryData.region}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-bold">Population:</span> {countryData.population.toLocaleString()}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-bold">Flag:</span>{" "}
+                  <img src={countryData.flags?.png} alt="Flag" className="w-16 inline-block" />
+                </p>
+              </div>
+            )}
+
+            <div className="flex justify-between items-center mt-6">
               <a
                 href={system.wiki_page}
                 target="_blank"
@@ -45,81 +85,3 @@ export function SystemsIndex({ systems, onShow }) {
     </div>
   );
 }
-
-// STYLED V1!
-// STYLED V1
-// STYLED v1
-// export function SystemsIndex({ systems, onShow }) {
-//   return (
-//     <div
-//       className="flex justify-center items-center h-screen bg-fixed bg-cover"
-//       style={{
-//         backgroundImage: `url('https://cdn.pixabay.com/photo/2016/03/08/20/03/parthenon-1245713_1280.jpg')`, // Replace with your preferred Greco-Roman background image
-//       }}
-//     >
-//       {systems.map((system) => (
-//         <div
-//           key={system.id}
-//           className="max-w-4xl bg-white bg-opacity-90 shadow-md rounded-lg overflow-hidden border border-gray-300 backdrop-blur-sm"
-//         >
-//           {/* Image Section */}
-//           <div className="w-full h-2/3">
-//             <img src={system.image_url} alt={system.country_name} className="w-full h-full object-cover" />
-//           </div>
-
-//           {/* Information Section */}
-//           <div className="p-6 bg-gray-800 bg-opacity-80 text-white">
-//             <h2 className="text-3xl font-bold text-gray-100 mb-4">{system.country_name}</h2>
-//             <p className="text-gray-200 text-sm mb-2">
-//               <span className="font-semibold text-gray-100">Economic System:</span> {system.economic_system}
-//             </p>
-//             <p className="text-gray-200 text-sm mb-2">
-//               <span className="font-semibold text-gray-100">Governmental System:</span> {system.governmental_system}
-//             </p>
-//             <p className="text-gray-200 text-sm mb-4">
-//               <span className="font-semibold text-gray-100">Cultural System:</span> {system.cultural_system}
-//             </p>
-//             <div className="flex justify-between items-center">
-//               <a
-//                 href={system.wiki_page}
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-blue-300 underline text-sm hover:text-blue-400"
-//               >
-//                 Wiki Page
-//               </a>
-//               <button
-//                 onClick={() => onShow(system)}
-//                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-//               >
-//                 More info
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-//UNSTYLED COD BELOW FOR REFERANCE ONLY
-//UNSTYLED COD BELOW FOR REFERANCE ONLY
-//UNSTYLED COD BELOW FOR REFERANCE ONLY
-// export function SystemsIndex({ systems, onShow }) {
-//   return (
-//     <div>
-//       <h1>A place based on your values ({systems.length} total)</h1>
-//       {systems.map((system) => (
-//         <div key={system.id}>
-//           <h2>{system.country_name}</h2>
-//           <p>Economic System: {system.economic_system}</p>
-//           <p>Governmental System: {system.governmental_system}</p>
-//           <p>Cultural System: {system.cultural_system}</p>
-//           <img src={system.image_url} alt="" />
-//           <a href={system.wiki_page}>Wiki Page</a>
-//           <button onClick={() => onShow(system)}>More info</button>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
