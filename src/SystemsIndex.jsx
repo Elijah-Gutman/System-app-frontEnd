@@ -3,18 +3,33 @@ import { useState, useEffect } from "react";
 export function SystemsIndex({ systems, onShow }) {
   const [countryData, setCountryData] = useState(null); // State for API data
 
+  async function runFetchKorea(countryName) {
+    return await fetch(`https://restcountries.com/v3.1/name/` + countryName)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`Rest Countries API Data for Korea:`, data); // Log raw data for testing
+        setCountryData(data[0]); // Save the first result from the API
+      });
+  }
+
+  async function runFetchAny(countryName) {
+    return await fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`Rest Countries API Data for ${countryName}:`, data); // Log raw data for testing
+        setCountryData(data[0]); // Save the first result from the API
+      })
+      .catch((error) => {
+        console.error(`Error fetching Rest Countries data for ${countryName}:`, error);
+      });
+  }
+
   useEffect(() => {
-    if (systems[0]?.country_name === "USA") {
-      // Fetch data from Rest Countries API if the first system is the USA
-      fetch("https://restcountries.com/v3.1/name/usa")
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Rest Countries API Data:", data); // Log raw data for testing
-          setCountryData(data[0]); // Save the first result from the API
-        })
-        .catch((error) => {
-          console.error("Error fetching Rest Countries data:", error);
-        });
+    if (systems[0]?.countryName === "N.Korea") {
+      runFetchKorea("korea");
+    } else {
+      const countryName = systems[0]?.country_name.toLowerCase();
+      runFetchAny(countryName);
     }
   }, [systems]);
 

@@ -14,15 +14,17 @@ axios.defaults.withCredentials = true;
 const router = createBrowserRouter([
   {
     element: (
-      <div>
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <Outlet />
+        <div className="flex-auto">
+          <Outlet />
+        </div>
         <Footer />
       </div>
     ),
     children: [
       {
-        path: "/", //nothing infront of the forward slash = index url
+        path: "/", //nothing Behind slash = index url
         element: <LandingPage />,
       },
       {
