@@ -8,12 +8,12 @@ axios.defaults.baseURL = "http://localhost:5173";
 axios.defaults.withCredentials = true;
 
 export function LandingPage() {
-  const [selectedOption, setSelectedOption] = useState(""); // State for radio button selection
+  const [selectedOption, setSelectedOption] = useState(""); // State for dropdown selection
   const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setSelectedOption(event.target.value); // Update the selected radio button
+    setSelectedOption(event.target.value); // Update the selected dropdown option
   };
 
   const handleFormSubmit = (event) => {
@@ -41,6 +41,8 @@ export function LandingPage() {
       case "Option7":
         navigate("/systems/seventh");
         break;
+      default:
+        alert("Please select an option!");
     }
 
     setIsModalVisible(false); // Close the modal after submission
@@ -68,95 +70,31 @@ export function LandingPage() {
         </div>
         <Modal show={isModalVisible} onClose={() => setIsModalVisible(false)}>
           <div className="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto border-2 border-gray-300">
-            <h2 className="text-lg font-bold mb-4 text-center">Answer the Questions Below</h2>
-            {/* Question 1 */}
-            <form onSubmit={handleFormSubmit} className="mb-6">
-              <h3 className="font-semibold mb-2">Do you enjoy responsibility?</h3>
-              <div className="flex gap-4 mb-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option1"
-                    checked={selectedOption === "Option1"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Yes
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option2"
-                    checked={selectedOption === "Option2"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  No
-                </label>
-              </div>
-            </form>
-            {/* Question 2 */}
-            <form onSubmit={handleFormSubmit} className="mb-6">
-              <h3 className="font-semibold mb-2">Do you believe wealth is a function of competence?</h3>
-              <div className="flex gap-4 mb-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option3"
-                    checked={selectedOption === "Option3"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Yes
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option4"
-                    checked={selectedOption === "Option4"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  No
-                </label>
-              </div>
-            </form>
-            {/* Question 3 */}
-            <form onSubmit={handleFormSubmit}>
-              <h3 className="font-semibold mb-2">Do you believe rights are inalienable?</h3>
-              <div className="flex gap-4 mb-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option5"
-                    checked={selectedOption === "Option5"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Yes
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option6"
-                    checked={selectedOption === "Option6"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  No
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    value="Option7"
-                    checked={selectedOption === "Option7"}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Depends
-                </label>
-              </div>
-              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            <h2 className="text-lg font-bold mb-4 text-center">Answer the Question Below</h2>
+            <form onSubmit={handleFormSubmit} className="space-y-6">
+              <label className="block">
+                <span className="text-gray-800 font-semibold">Select your answer:</span>
+                <select
+                  value={selectedOption}
+                  onChange={handleChange}
+                  className="block w-full mt-2 px-4 py-2 border border-gray-300 rounded-md bg-gray-100 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="" disabled>
+                    Choose your value
+                  </option>
+                  <option value="Option1">I value responsibility</option>
+                  <option value="Option2">I value peace</option>
+                  <option value="Option3">I value homogeneity </option>
+                  <option value="Option4">I value rigid hierarchy </option>
+                  <option value="Option5">I value social norms</option>
+                  <option value="Option6">I value investment</option>
+                  <option value="Option7">I value beer </option>
+                </select>
+              </label>
+              <button
+                type="submit"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-all"
+              >
                 Submit
               </button>
             </form>

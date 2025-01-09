@@ -1,39 +1,24 @@
+import { Clock } from "./Clock"; // Adjust the path based on your folder structure
 import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const navigate = useNavigate();
-  const handleNavigation = () => {
-    navigate("/");
-  };
 
   return (
-    <header className="absolute top-4 left-4">
+    <header className="bg-blue-600 text-white p-4 shadow-lg flex justify-between items-center relative">
+      {/* Home Button */}
       <button
-        onClick={handleNavigation}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded shadow transition-all"
+        onClick={() => navigate("/")}
+        className="bg-white text-blue-600 px-4 py-2 rounded-lg shadow-md hover:bg-gray-200 transition"
       >
         Home
       </button>
+      {/* Clock */}
+      <div className="absolute top-4 right-4">
+        <div className="w-40 h-40 bg-white rounded-full shadow-lg p-2 flex items-center justify-center">
+          <Clock />
+        </div>
+      </div>
     </header>
   );
 }
-
-// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
-// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
-// UNSTYLED HEADER COMPONENT FOR REFERENCE ONLY
-// import "./index.css";
-// import { useNavigate } from "react-router-dom";
-
-// export function Header() {
-//   const navigate = useNavigate();
-//   const handleNavigation = () => {
-//     navigate("/");
-//   };
-//   return (
-//     <header>
-//       <nav>
-//         <button onClick={handleNavigation}>Home</button>
-//       </nav>
-//     </header>
-//   );
-// }
