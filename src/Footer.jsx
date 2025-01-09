@@ -13,28 +13,25 @@ export function Footer() {
 
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-4",
-          messages: [...messages, { role: "user", content: input }],
-        },
-        {
-          headers: {
-            Authorization: `Bearer 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`,
-            "Content-Type": "application/json",
-          },
-        }
+        "http://localhost:3000/chatbot", // Replace with your backend's URL
+        { message: input } // Send only the user input to the backend
       );
 
+      const reply = response.data.reply; // Extract the reply from the backend response
+
       // Add AI response
-      setMessages([
-        ...messages,
-        { role: "user", content: input },
-        { role: "assistant", content: response.data.choices[0].message.content },
-      ]);
+      setMessages([...messages, { role: "user", content: input }, { role: "assistant", content: reply }]);
+
       setInput(""); // Clear the input field
     } catch (error) {
       console.error("Error sending message:", error);
+
+      // Optionally, add an error message to the chat
+      setMessages([
+        ...messages,
+        { role: "user", content: input },
+        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+      ]);
     }
   };
 
