@@ -64,6 +64,10 @@ const router = createBrowserRouter([
         element: <SystemsPage isSeventhSystem={true} />,
       },
       {
+        path: "/systems/eighth", //this is the eighth system
+        element: <SystemsPage isEighthSystem={true} />,
+      },
+      {
         path: "/signup",
         element: <SignupPage />,
       },

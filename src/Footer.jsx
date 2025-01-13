@@ -36,14 +36,19 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full text-center p-4 bg-gray-100 border-t">
-      <p className="text-gray-600 text-sm mb-4">Copyright 2024</p>
+    <footer className="w-full text-center p-4 bg-gray-100 dark:bg-gray-900 border-t dark:border-gray-700">
+      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">© 2024 System-App. All Rights Reserved.</p>
 
       {/* Chatbox */}
-      <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-4">
-        <div className="h-48 overflow-y-auto border-b mb-4">
+      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4">
+        <div className="h-48 overflow-y-auto border-b mb-4 border-gray-300 dark:border-gray-600">
           {messages.map((msg, index) => (
-            <div key={index} className={`mb-2 ${msg.role === "assistant" ? "text-blue-600" : "text-gray-800"}`}>
+            <div
+              key={index}
+              className={`mb-2 ${
+                msg.role === "assistant" ? "text-blue-600 dark:text-blue-300" : "text-gray-800 dark:text-gray-100"
+              }`}
+            >
               <strong>{msg.role === "assistant" ? "AI" : "You"}:</strong> {msg.content}
             </div>
           ))}
@@ -55,9 +60,12 @@ export function Footer() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything..."
-            className="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none"
+            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
           />
-          <button onClick={sendMessage} className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
+          <button
+            onClick={sendMessage}
+            className="bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 dark:hover:bg-blue-500 transition"
+          >
             Send
           </button>
         </div>
