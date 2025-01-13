@@ -5,6 +5,18 @@ import { useState } from "react";
 export function Header() {
   const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // State to track the search input
+
+  // Map country names to routes
+  const countryRoutes = {
+    USA: "/systems/first",
+    Canada: "/systems/second",
+    Sweden: "/systems/third",
+    Russia: "/systems/fourth",
+    Japan: "/systems/fifth",
+    Luxembourg: "/systems/sixth",
+    Germany: "/systems/seventh",
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
@@ -12,6 +24,16 @@ export function Header() {
       document.documentElement.classList.remove("dark");
     } else {
       document.documentElement.classList.add("dark");
+    }
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const route = countryRoutes[searchTerm.trim()]; // Match the input to a route
+    if (route) {
+      navigate(route); // Navigate to the matching route
+    } else {
+      alert("Country not found. Please enter a valid country name."); // Handle invalid input
     }
   };
 
@@ -32,14 +54,31 @@ export function Header() {
         </div>
       </div>
 
-      {/* Dark Mode Toggle Button */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+      {/* Dark Mode Toggle and Search */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-4">
         <button
           onClick={toggleDarkMode}
           className="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 px-4 py-2 rounded-lg shadow-md hover:bg-gray-700 dark:hover:bg-gray-300 transition"
         >
           {isDarkMode ? "Light Mode 🌞" : "Dark Mode 🌙"}
         </button>
+
+        {/* Search Bar */}
+        <form onSubmit={handleSearch} className="flex items-center">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search country..."
+            className="text-black rounded-md px-4 py-2 focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+          >
+            Search
+          </button>
+        </form>
       </div>
     </header>
   );
