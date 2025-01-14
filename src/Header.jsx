@@ -6,6 +6,7 @@ export function Header() {
   const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState(""); // State to track the search input
+  const [suggestion, setSuggestion] = useState(""); // State to track the autocomplete suggestion
 
   // Map country names to routes
   const countryRoutes = {
@@ -27,6 +28,17 @@ export function Header() {
     }
   };
 
+  // Handle search input changes
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    // Find a suggestion if the input partially matches a country name
+    const match = Object.keys(countryRoutes).find((country) => country.toLowerCase().startsWith(value.toLowerCase()));
+    setSuggestion(match || ""); // Set the suggestion if found
+  };
+
+  // Handle form submission
   const handleSearch = (event) => {
     event.preventDefault();
     const route = countryRoutes[searchTerm.trim()]; // Match the input to a route
@@ -34,6 +46,14 @@ export function Header() {
       navigate(route); // Navigate to the matching route
     } else {
       alert("Country not found. Please enter a valid country name."); // Handle invalid input
+    }
+  };
+
+  // Handle Tab key for autocomplete
+  const handleKeyDown = (event) => {
+    if (event.key === "Tab" && suggestion) {
+      event.preventDefault(); // Prevent the default tab behavior
+      setSearchTerm(suggestion); // Autocomplete with the suggestion
     }
   };
 
@@ -68,7 +88,8 @@ export function Header() {
           <input
             type="text"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown} // Add Tab key listener
             placeholder="Search country..."
             className="text-black rounded-md px-4 py-2 focus:outline-none"
           />
