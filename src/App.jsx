@@ -7,6 +7,7 @@ import { SystemsPage } from "./SystemsPage";
 import { Footer } from "./Footer";
 import { LandingPage } from "./LandingPage";
 import { SystemsNew } from "./SystemsNew";
+import { Quizzes } from "./Quizzes"; // Import the Quizzes component
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/", //nothing Behind slash = index url
+        path: "/", // Landing page route
         element: <LandingPage />,
+      },
+      {
+        path: "/quizzes", // New route for testing the Quizzes component
+        element: <Quizzes />,
       },
       {
         path: "/systems",
@@ -36,35 +41,35 @@ const router = createBrowserRouter([
         element: <SystemsPage />,
       },
       {
-        path: "/systems/first", //this is the first system
+        path: "/systems/first",
         element: <SystemsPage isFirstSystem={true} />,
       },
       {
-        path: "/systems/second", //this is the second system
+        path: "/systems/second",
         element: <SystemsPage isSecondSystem={true} />,
       },
       {
-        path: "/systems/third", //this is the third system
+        path: "/systems/third",
         element: <SystemsPage isThirdSystem={true} />,
       },
       {
-        path: "/systems/fourth", //this is the fourth system
+        path: "/systems/fourth",
         element: <SystemsPage isFourthSystem={true} />,
       },
       {
-        path: "/systems/fifth", //this is the fifth system
+        path: "/systems/fifth",
         element: <SystemsPage isFifthSystem={true} />,
       },
       {
-        path: "/systems/sixth", //this is the sixth system
+        path: "/systems/sixth",
         element: <SystemsPage isSixthSystem={true} />,
       },
       {
-        path: "/systems/seventh", //this is the seventh system
+        path: "/systems/seventh",
         element: <SystemsPage isSeventhSystem={true} />,
       },
       {
-        path: "/systems/eighth", //this is the eighth system
+        path: "/systems/eighth",
         element: <SystemsPage isEighthSystem={true} />,
       },
       {
